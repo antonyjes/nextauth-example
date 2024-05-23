@@ -9,13 +9,13 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { LogoutButton } from "@/components/auth/logout-button";
 
 export const UserButton = () => {
-    const user = useCurrentUser();
+    const { session } = useCurrentUser();
 
     return(
         <DropdownMenu>
             <DropdownMenuTrigger>
                 <Avatar>
-                    <AvatarImage src={user?.image || ""} />
+                    <AvatarImage src={session?.user?.image || ""} />
                     <AvatarFallback className="bg-sky-500">
                         <FaUser className="text-white" />
                     </AvatarFallback>
