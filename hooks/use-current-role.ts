@@ -1,7 +1,7 @@
-import { useSession } from "next-auth/react";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 export const useCurrentRole = () => {
-    const session = useSession();
+    const { session } = useCurrentUser();
 
-    return session.data?.user?.role;
+    return session?.user?.role;
 }
