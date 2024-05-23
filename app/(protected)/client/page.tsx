@@ -4,10 +4,10 @@ import { UserInfo } from "@/components/user-info";
 import { useCurrentUser } from "@/hooks/use-current-user";
 
 const ClientPage = () => {
-    const user = useCurrentUser();
+    const {session} = useCurrentUser();
 
     return(
-        <UserInfo user={user} label="📱 Client component" />
+        <UserInfo user={session?.user} label="📱 Client component" />
     )
 }
 
