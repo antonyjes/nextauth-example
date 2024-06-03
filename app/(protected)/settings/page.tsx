@@ -4,16 +4,19 @@ import { settings } from "@/actions/settings";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useTransition } from "react";
+import { useSession } from "next-auth/react";
 
 const SettingsPage = () => {
+  const { update } = useSession();
   const [isPending, startTransition] = useTransition();
 
   const onClick = () => {
     startTransition(() => {
       try {
         settings({
-          name: "New name",
+          name: "Changed Name",
         })
+        update();
       } catch (error) {
         console.log("Error: ", error);
       }
