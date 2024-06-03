@@ -1,16 +1,36 @@
 "use client";
 
-import { logout } from "@/actions/logout";
+import { settings } from "@/actions/settings";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { useTransition } from "react";
 
 const SettingsPage = () => {
+  const [isPending, startTransition] = useTransition();
+
   const onClick = () => {
-    logout();
+    startTransition(() => {
+      try {
+        settings({
+          name: "New name",
+        })
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    })
   }
 
   return (
-    <div className="bg-white p-10 rounded-xl">
-      <button onClick={onClick} type="submit">Sign out</button>
-    </div>
+    <Card className="w-[600px]">
+      <CardHeader>
+        <p className="text-2xl font-semibold text-center">
+          ⚙ Settings
+        </p>
+      </CardHeader>
+      <CardContent>
+        <Button disabled={isPending} onClick={onClick}>Update name</Button>
+      </CardContent>
+    </Card>
   );
 };
 
